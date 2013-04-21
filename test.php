@@ -8,7 +8,7 @@ session_start();
 //if(isset($_GET['lang']))
 if(isset($_SESSION['lang']))
 {
-    echo "DEbug";
+    //echo "DEbug";
 	//$translate = new Translator($_GET['lang']);
 	$t = new Translator($_SESSION['lang']);
 }
@@ -18,7 +18,7 @@ else
 
 <form>
     <p>
-    <?php echo $_SESSION['lang']; ?>
+    
     <?php echo $t->__("Last name"); ?><input type="text" name="lastname"> </input>
     </p>
     <p>
