@@ -1,628 +1,1779 @@
-
+<?php
+	session_start();
+    $i=0;
+    
+	$tabLat = array();
+	$tabLon = array();
+    $tab = array();
+    $tab2 = array();
+    try {
+	$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+	$bd=new PDO('mysql:host=localhost;dbname=logipamo_nasa','logipamo_esih','esih007',$pdo_options);
+    }catch (Exception $e){
+	die('Erreur de connection');
+    }
+    
+    $requete=$bd->query('SELECT * FROM files ORDER BY RAND() LIMIT 12');
+    //$requete->execute(array($username));
+    while($val=$requete->fetch()){
+	//$name=$val['name'];
+	$path=$val['url'];
+	$country=$val['geon'];
+	$desc=$val['feat'];
+	$lat=$val['lat'];
+	$lon=$val['lon'];
+	//$width=$val['width'];
+	//$height=$val['height'];
+	//$info=pathinfo($path);
+	$tabLon[$i] = $lon;
+	$tabLat[$i] = $lat;
+	$tab[$i] = $path;
+	$tab1[$i] = $country;
+	$tab2[$i] = $desc;
+	$i++;
+    }
+?>
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Scaffolding á Bootstrap</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <html>
+        <head>
+            <?php
+				if(isset($_GET['conn']))
+					{
+						?><title>Hi <?php echo $_SESSION['username'];?></title><?php
+					}
+				else
+					{
+						?><title> Nasa space explorer </title><?php
+					}
+			?>
+			
+			
+            <link rel="stylesheet" type="text/css" href="style1.css" />
+            <link rel="stylesheet" type="text/css" href="style2.css" />
+			<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+			<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+			<script src="jquery.js"></script>
+            <script type="text/javascript">
+               function example_ajax_request() {
+                  $('#example-placeholder').html('<p><img src="img/ajax-loader.gif"/></p>');
+                  $('#example-placeholder').load("<div>BONJOUR</div>");
+                }
+				
+				
+			$(document).ready(function() {
+				
+				var latlng = new google.maps.LatLng(<?php echo (int)$tabLat[0];?>,<?php echo (int)$tabLon[0];?>);		
+				var latlng1 = new google.maps.LatLng(<?php echo (int)$tabLat[1];?>,<?php echo (int)$tabLon[1];?>);		
+				var latlng2 = new google.maps.LatLng(<?php echo (int)$tabLat[2];?>,<?php echo (int)$tabLon[2];?>);		
+				var latlng3 = new google.maps.LatLng(<?php echo (int)$tabLat[3];?>,<?php echo (int)$tabLon[3];?>);		
+				var latlng4 = new google.maps.LatLng(<?php echo (int)$tabLat[4];?>,<?php echo (int)$tabLon[4];?>);		
+				var latlng5 = new google.maps.LatLng(<?php echo (int)$tabLat[5];?>,<?php echo (int)$tabLon[5];?>);		
+				var latlng6 = new google.maps.LatLng(<?php echo (int)$tabLat[6];?>,<?php echo (int)$tabLon[6];?>);		
+				var latlng7 = new google.maps.LatLng(<?php echo (int)$tabLat[7];?>,<?php echo (int)$tabLon[7];?>);		
+				var latlng8 = new google.maps.LatLng(<?php echo (int)$tabLat[8];?>,<?php echo (int)$tabLon[8];?>);		
+				var latlng9 = new google.maps.LatLng(<?php echo (int)$tabLat[9];?>,<?php echo (int)$tabLon[9];?>);		
+				var latlng10 = new google.maps.LatLng(<?php echo (int)$tabLat[10];?>,<?php echo (int)$tabLon[10];?>);		
+				var latlng11 = new google.maps.LatLng(<?php echo (int)$tabLat[11];?>,<?php echo (int)$tabLon[11];?>);		
+				
+				var myOptions = {
+					zoom: 11, center: latlng, mapTypeId: google.maps.MapTypeId.ROADMAP
+				};
+				var myOptions1 = {
+					zoom: 11, center: latlng1, mapTypeId: google.maps.MapTypeId.ROADMAP
+				};
+				var myOptions2 = {
+					zoom: 11, center: latlng2, mapTypeId: google.maps.MapTypeId.ROADMAP
+				};
+				var myOptions3 = {
+					zoom: 11, center: latlng3, mapTypeId: google.maps.MapTypeId.ROADMAP
+				};
+				var myOptions4 = {
+					zoom: 11, center: latlng4, mapTypeId: google.maps.MapTypeId.ROADMAP
+				};
+				var myOptions5 = {
+					zoom: 11, center: latlng5, mapTypeId: google.maps.MapTypeId.ROADMAP
+				};
+				var myOptions6 = {
+					zoom: 11, center: latlng6, mapTypeId: google.maps.MapTypeId.ROADMAP
+				};
+				var myOptions7 = {
+					zoom: 11, center: latlng7, mapTypeId: google.maps.MapTypeId.ROADMAP
+				};
+				var myOptions8 = {
+					zoom: 11, center: latlng8, mapTypeId: google.maps.MapTypeId.ROADMAP
+				};
+				var myOptions9 = {
+					zoom: 11, center: latlng9, mapTypeId: google.maps.MapTypeId.ROADMAP
+				};
+				var myOptions10 = {
+					zoom: 11, center: latlng10, mapTypeId: google.maps.MapTypeId.ROADMAP
+				};
+				var myOptions11 = {
+					zoom: 11, center: latlng11, mapTypeId: google.maps.MapTypeId.ROADMAP
+				};
+				
+				var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+				var map = new google.maps.Map(document.getElementById("map_canvas2"), myOptions1);
+				var map = new google.maps.Map(document.getElementById("map_canvas3"), myOptions2);
+				var map = new google.maps.Map(document.getElementById("map_canvas4"), myOptions3);
+				var map = new google.maps.Map(document.getElementById("map_canvas5"), myOptions4);
+				var map = new google.maps.Map(document.getElementById("map_canvas6"), myOptions5);
+				var map = new google.maps.Map(document.getElementById("map_canvas7"), myOptions6);
+				var map = new google.maps.Map(document.getElementById("map_canvas8"), myOptions7);
+				var map = new google.maps.Map(document.getElementById("map_canvas9"), myOptions8);
+				var map = new google.maps.Map(document.getElementById("map_canvas10"), myOptions9);
+				var map = new google.maps.Map(document.getElementById("map_canvas11"), myOptions10);
+				var map = new google.maps.Map(document.getElementById("map_canvas12"), myOptions11);
+						
+			});
+			
+            </script>
+	    <!--Adding Verification code-->
+	    <script>
 
-    <!-- Le styles -->
-    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
-    <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-    <link href="bootstrap/css/docs.css" rel="stylesheet">
-    <link href="bootstrap/css/prettify.css" rel="stylesheet">
+			function surligne(champ, erreur)
+				{
+					if(erreur)
+						champ.style.backgroundColor = "#fba";
+					else
+						champ.style.backgroundColor = "";
+				}
+			
+			function erreurConn(champ, erreur)
+				{
+					if(erreur)
+						champ.value= "Il y a erreur dans vos identifiants...";
+					else
+						champ.style.backgroundColor = "";
+				}
 
-    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="bootstrap/js/html5shiv.js"></script>
-    <![endif]-->
+			function verifNom(champ)
+				{
+					if(champ.value.length < 1)
+						{
+							surligne(champ, true);
+							return false;
+						}
+					else
+						{
+							surligne(champ, false);
+							return true;
+						}
+				}
 
-    <!-- Le fav and touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="bootstrap/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="bootstrap/ico/apple-touch-icon-114-precomposed.png">
-      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="bootstrap/ico/apple-touch-icon-72-precomposed.png">
-                    <link rel="apple-touch-icon-precomposed" href="bootstrap/ico/apple-touch-icon-57-precomposed.png">
-                                   <link rel="shortcut icon" href="bootstrap/ico/favicon.png">
-
-    <script type="text/javascript">
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-146052-10']);
-      _gaq.push(['_trackPageview']);
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-    </script>
-  </head>
-
-  <body data-spy="scroll" data-target=".bs-docs-sidebar">
-
-    <!-- Navbar
-    ================================================== -->
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="brand" href="./index.html">Bootstrap</a>
-          <div class="nav-collapse collapse">
-            <ul class="nav">
-              <li class="">
-                <a href="./index.html">Home</a>
-              </li>
-              <li class="">
-                <a href="./getting-started.html">Get started</a>
-              </li>
-              <li class="active">
-                <a href="./scaffolding.html">Scaffolding</a>
-              </li>
-              <li class="">
-                <a href="./base-css.html">Base CSS</a>
-              </li>
-              <li class="">
-                <a href="./components.html">Components</a>
-              </li>
-              <li class="">
-                <a href="./javascript.html">JavaScript</a>
-              </li>
-              <li class="">
-                <a href="./customize.html">Customize</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-
-<!-- Subhead
-================================================== -->
-<header class="jumbotron subhead" id="overview">
-  <div class="container">
-    <h1>Scaffolding</h1>
-    <p class="lead">Bootstrap is built on responsive 12-column grids, layouts, and components.</p>
-  </div>
-</header>
-
-  <div class="container">
-
-    <!-- Docs nav
-    ================================================== -->
-    <div class="row">
-      <div class="span3 bs-docs-sidebar">
-        <ul class="nav nav-list bs-docs-sidenav">
-          <li><a href="#global"><i class="icon-chevron-right"></i> Global styles</a></li>
-          <li><a href="#gridSystem"><i class="icon-chevron-right"></i> Grid system</a></li>
-          <li><a href="#fluidGridSystem"><i class="icon-chevron-right"></i> Fluid grid system</a></li>
-          <li><a href="#layouts"><i class="icon-chevron-right"></i> Layouts</a></li>
-          <li><a href="#responsive"><i class="icon-chevron-right"></i> Responsive design</a></li>
-        </ul>
-      </div>
-      <div class="span9">
-
-
-
-        <!-- Global Bootstrap settings
-        ================================================== -->
-        <section id="global">
-          <div class="page-header">
-            <h1>Global settings</h1>
-          </div>
-
-          <h3>Requires HTML5 doctype</h3>
-          <p>Bootstrap makes use of certain HTML elements and CSS properties that require the use of the HTML5 doctype. Include it at the beginning of all your projects.</p>
-<pre class="prettyprint linenums">
-&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-  ...
-&lt;/html&gt;
-</pre>
-
-          <h3>Typography and links</h3>
-          <p>Bootstrap sets basic global display, typography, and link styles. Specifically, we:</p>
-          <ul>
-            <li>Remove <code>margin</code> on the body</li>
-            <li>Set <code>background-color: white;</code> on the <code>body</code></li>
-            <li>Use the <code>@baseFontFamily</code>, <code>@baseFontSize</code>, and <code>@baseLineHeight</code> attributes as our typographic base</li>
-            <li>Set the global link color via <code>@linkColor</code> and apply link underlines only on <code>:hover</code></li>
-          </ul>
-          <p>These styles can be found within <strong>scaffolding.less</strong>.</p>
-
-          <h3>Reset via Normalize</h3>
-          <p>With Bootstrap 2, the old reset block has been dropped in favor of <a href="http://necolas.github.com/normalize.css/" target="_blank">Normalize.css</a>, a project by <a href="http://twitter.com/necolas" target="_blank">Nicolas Gallagher</a> and <a href="http://twitter.com/jon_neal" target="_blank">Jonathan Neal</a> that also powers the <a href="http://html5boilerplate.com" target="_blank">HTML5 Boilerplate</a>. While we use much of Normalize within our <strong>reset.less</strong>, we have removed some elements specifically for Bootstrap.</p>
-
-        </section>
-
-
-
-
-        <!-- Grid system
-        ================================================== -->
-        <section id="gridSystem">
-          <div class="page-header">
-            <h1>Default grid system</h1>
-          </div>
-
-          <h2>Live grid example</h2>
-          <p>The default Bootstrap grid system utilizes <strong>12 columns</strong>, making for a 940px wide container without <a href="./scaffolding.html#responsive">responsive features</a> enabled. With the responsive CSS file added, the grid adapts to be 724px and 1170px wide depending on your viewport. Below 767px viewports, the columns become fluid and stack vertically.</p>
-          <div class="bs-docs-grid">
-            <div class="row show-grid">
-              <div class="span1">1</div>
-              <div class="span1">1</div>
-              <div class="span1">1</div>
-              <div class="span1">1</div>
-              <div class="span1">1</div>
-              <div class="span1">1</div>
-              <div class="span1">1</div>
-              <div class="span1">1</div>
-              <div class="span1">1</div>
-            </div>
-            <div class="row show-grid">
-              <div class="span2">2</div>
-              <div class="span3">3</div>
-              <div class="span4">4</div>
-            </div>
-            <div class="row show-grid">
-              <div class="span4">4</div>
-              <div class="span5">5</div>
-            </div>
-            <div class="row show-grid">
-              <div class="span9">9</div>
-            </div>
-          </div>
-
-          <h3>Basic grid HTML</h3>
-          <p>For a simple two column layout, create a <code>.row</code> and add the appropriate number of <code>.span*</code> columns. As this is a 12-column grid, each <code>.span*</code> spans a number of those 12 columns, and should always add up to 12 for each row (or the number of columns in the parent).</p>
-<pre class="prettyprint linenums">
-&lt;div class="row"&gt;
-  &lt;div class="span4"&gt;...&lt;/div&gt;
-  &lt;div class="span8"&gt;...&lt;/div&gt;
-&lt;/div&gt;
-</pre>
-          <p>Given this example, we have <code>.span4</code> and <code>.span8</code>, making for 12 total columns and a complete row.</p>
-
-          <h2>Offsetting columns</h2>
-          <p>Move columns to the right using <code>.offset*</code> classes. Each class increases the left margin of a column by a whole column. For example, <code>.offset4</code> moves <code>.span4</code> over four columns.</p>
-          <div class="bs-docs-grid">
-            <div class="row show-grid">
-              <div class="span4">4</div>
-              <div class="span3 offset2">3 offset 2</div>
-            </div><!-- /row -->
-            <div class="row show-grid">
-              <div class="span3 offset1">3 offset 1</div>
-              <div class="span3 offset2">3 offset 2</div>
-            </div><!-- /row -->
-            <div class="row show-grid">
-              <div class="span6 offset3">6 offset 3</div>
-            </div><!-- /row -->
-          </div>
-<pre class="prettyprint linenums">
-&lt;div class="row"&gt;
-  &lt;div class="span4"&gt;...&lt;/div&gt;
-  &lt;div class="span3 offset2"&gt;...&lt;/div&gt;
-&lt;/div&gt;
-</pre>
-
-          <h2>Nesting columns</h2>
-          <p>To nest your content with the default grid, add a new <code>.row</code> and set of <code>.span*</code> columns within an existing <code>.span*</code> column. Nested rows should include a set of columns that add up to the number of columns of its parent.</p>
-          <div class="row show-grid">
-            <div class="span9">
-              Level 1 column
-              <div class="row show-grid">
-                <div class="span6">
-                  Level 2
-                </div>
-                <div class="span3">
-                  Level 2
-                </div>
-              </div>
-            </div>
-          </div>
-<pre class="prettyprint linenums">
-&lt;div class="row"&gt;
-  &lt;div class="span9"&gt;
-    Level 1 column
-    &lt;div class="row"&gt;
-      &lt;div class="span6"&gt;Level 2&lt;/div&gt;
-      &lt;div class="span3"&gt;Level 2&lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-</pre>
-        </section>
-
-
-
-        <!-- Fluid grid system
-        ================================================== -->
-        <section id="fluidGridSystem">
-          <div class="page-header">
-            <h1>Fluid grid system</h1>
-          </div>
-
-          <h2>Live fluid grid example</h2>
-          <p>The fluid grid system uses percents instead of pixels for column widths. It has the same responsive capabilities as our fixed grid system, ensuring proper proportions for key screen resolutions and devices.</p>
-          <div class="bs-docs-grid">
-            <div class="row-fluid show-grid">
-              <div class="span1">1</div>
-              <div class="span1">1</div>
-              <div class="span1">1</div>
-              <div class="span1">1</div>
-              <div class="span1">1</div>
-              <div class="span1">1</div>
-              <div class="span1">1</div>
-              <div class="span1">1</div>
-              <div class="span1">1</div>
-              <div class="span1">1</div>
-              <div class="span1">1</div>
-              <div class="span1">1</div>
-            </div>
-            <div class="row-fluid show-grid">
-              <div class="span4">4</div>
-              <div class="span4">4</div>
-              <div class="span4">4</div>
-            </div>
-            <div class="row-fluid show-grid">
-              <div class="span4">4</div>
-              <div class="span8">8</div>
-            </div>
-            <div class="row-fluid show-grid">
-              <div class="span6">6</div>
-              <div class="span6">6</div>
-            </div>
-            <div class="row-fluid show-grid">
-              <div class="span12">12</div>
-            </div>
-          </div>
-
-          <h3>Basic fluid grid HTML</h3>
-          <p>Make any row "fluid" by changing <code>.row</code> to <code>.row-fluid</code>. The column classes stay the exact same, making it easy to flip between fixed and fluid grids.</p>
-<pre class="prettyprint linenums">
-&lt;div class="row-fluid"&gt;
-  &lt;div class="span4"&gt;...&lt;/div&gt;
-  &lt;div class="span8"&gt;...&lt;/div&gt;
-&lt;/div&gt;
-</pre>
-
-          <h2>Fluid offsetting</h2>
-          <p>Operates the same way as the fixed grid system offsetting: add <code>.offset*</code> to any column to offset by that many columns.</p>
-          <div class="bs-docs-grid">
-            <div class="row-fluid show-grid">
-              <div class="span4">4</div>
-              <div class="span4 offset4">4 offset 4</div>
-            </div><!-- /row -->
-            <div class="row-fluid show-grid">
-              <div class="span3 offset3">3 offset 3</div>
-              <div class="span3 offset3">3 offset 3</div>
-            </div><!-- /row -->
-            <div class="row-fluid show-grid">
-              <div class="span6 offset6">6 offset 6</div>
-            </div><!-- /row -->
-          </div>
-<pre class="prettyprint linenums">
-&lt;div class="row-fluid"&gt;
-  &lt;div class="span4"&gt;...&lt;/div&gt;
-  &lt;div class="span4 offset2"&gt;...&lt;/div&gt;
-&lt;/div&gt;
-</pre>
-
-          <h2>Fluid nesting</h2>
-          <p>Fluid grids utilize nesting differently: each nested level of columns should add up to 12 columns. This is because the fluid grid uses percentages, not pixels, for setting widths.</p>
-          <div class="row-fluid show-grid">
-            <div class="span12">
-              Fluid 12
-              <div class="row-fluid show-grid">
-                <div class="span6">
-                  Fluid 6
-                  <div class="row-fluid show-grid">
-                    <div class="span6">
-                      Fluid 6
+			function verifMail(champ)
+				{
+					var regex = /^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
+					if(!regex.test(champ.value))
+						{
+							surligne(champ, true);
+							return false;
+						}
+					else
+						{
+							surligne(champ, false);
+							return true;
+						}
+				}
+				
+				
+			function verifPass(champ)
+				{
+					if(champ.value.length < 1 || champ.value.length > 20)
+						{
+							surligne(champ, true);
+							return false;
+						}
+					else
+						{
+							surligne(champ, false);
+							return true;
+						}
+				}
+				
+			function verifPass1(pass, confPass)
+				{
+					if(confPass.value.length < 1 || confPass.value.length > 20)
+						{
+							surligne(confPass, true);
+							return false;
+						}
+					else
+						{
+							if(confPass.value === pass.value)
+								{
+									surligne(confPass, false);
+									return true;
+								}
+							else
+								{
+									surligne(confPass, true);
+									return false;
+								}
+						}
+				}
+			
+				
+			function verifForm(f)
+				{
+					var nomOk = verifNom(f.nom);
+					var mailOk = verifMail(f.mail);
+					var passOk = verifPass(f.motDePasse);
+					
+					if(nomOk && passOk && mailOk)
+						return true;
+					else
+						{
+							alert("Rassurez-vous d'avoir fourni toutes les informations requises!");
+							return false;
+						}
+				}
+				
+		
+	</script>
+	    <!--Adding JQUERY ANIMATION -->
+            <link type="text/css" href="css/ui-lightness/jquery-ui-1.8.18.custom.css" rel="stylesheet" />	
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="js/jquery-ui-1.8.18.custom.min.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				// Dialog 1			
+				$('#dialog1').dialog({
+					autoOpen: false,
+					width: 1060,
+					height: 600,
+					resizable: true,
+					/*buttons: {
+						"Ok": function() { 
+							$(this).dialog("close"); 
+						}, 
+						"Cancel": function() { 
+							$(this).dialog("close"); 
+						} 
+					}*/
+				});
+				
+				// Dialog Link1
+				$('#dialog_link1').click(function(){
+					$('#dialog1').dialog('open');
+					return false;
+				});
+                                /////////////////////
+                                // Dialog 2			
+				$('#dialog2').dialog({
+					autoOpen: false,
+					width: 1060,
+					height: 600,
+					resizable: true,
+					/*buttons: {
+						"Ok": function() { 
+							$(this).dialog("close"); 
+						}, 
+						"Cancel": function() { 
+							$(this).dialog("close"); 
+						} 
+					}*/
+				});
+				
+				// Dialog Link
+				$('#dialog_link2').click(function(){
+					$('#dialog2').dialog('open');
+					return false;
+				});
+                                ///// Dialog 3			
+				$('#dialog3').dialog({
+					autoOpen: false,
+					width: 1060,
+                                        height: 600,
+					resizable: true,
+					/*buttons: {
+						"Ok": function() { 
+							$(this).dialog("close"); 
+						}, 
+						"Cancel": function() { 
+							$(this).dialog("close"); 
+						} 
+					}*/
+				});
+				
+				// Dialog Link
+				$('#dialog_link3').click(function(){
+					$('#dialog3').dialog('open');
+					return false;
+				});
+                                ///// Dialog 4			
+				$('#dialog4').dialog({
+					autoOpen: false,
+					width: 1060,
+                                        height: 600,
+					resizable: true,
+					/*buttons: {
+						"Ok": function() { 
+							$(this).dialog("close"); 
+						}, 
+						"Cancel": function() { 
+							$(this).dialog("close"); 
+						} 
+					}*/
+				});
+				
+				// Dialog Link
+				$('#dialog_link4').click(function(){
+					$('#dialog4').dialog('open');
+					return false;
+				});
+                                ///// Dialog 5			
+				$('#dialog5').dialog({
+					autoOpen: false,
+					width: 1060,
+                                        height: 600,
+					resizable: true,
+					/*buttons: {
+						"Ok": function() { 
+							$(this).dialog("close"); 
+						}, 
+						"Cancel": function() { 
+							$(this).dialog("close"); 
+						} 
+					}*/
+				});
+				
+				// Dialog Link 5
+				$('#dialog_link5').click(function(){
+					$('#dialog5').dialog('open');
+					return false;
+				});
+                                ///// Dialog 6			
+				$('#dialog6').dialog({
+					autoOpen: false,
+					width: 1060,
+                                        height: 600,
+					resizable: true,
+					/*buttons: {
+						"Ok": function() { 
+							$(this).dialog("close"); 
+						}, 
+						"Cancel": function() { 
+							$(this).dialog("close"); 
+						} 
+					}*/
+				});
+				
+				// Dialog Link 6
+				$('#dialog_link6').click(function(){
+					$('#dialog6').dialog('open');
+					return false;
+				});
+                                ///// Dialog 7			
+				$('#dialog7').dialog({
+					autoOpen: false,
+					width: 1060,
+                                        height: 600,
+					resizable: true,
+					/*buttons: {
+						"Ok": function() { 
+							$(this).dialog("close"); 
+						}, 
+						"Cancel": function() { 
+							$(this).dialog("close"); 
+						} 
+					}*/
+				});
+				
+				// Dialog Link 7
+				$('#dialog_link7').click(function(){
+					$('#dialog7').dialog('open');
+					return false;
+				});
+                                ///// Dialog 8			
+				$('#dialog8').dialog({
+					autoOpen: false,
+					width: 1060,
+                                        height: 600,
+					resizable: true,
+					/*buttons: {
+						"Ok": function() { 
+							$(this).dialog("close"); 
+						}, 
+						"Cancel": function() { 
+							$(this).dialog("close"); 
+						} 
+					}*/
+				});
+				
+				// Dialog Link 8
+				$('#dialog_link8').click(function(){
+					$('#dialog8').dialog('open');
+					return false;
+				});
+                                ///// Dialog 9			
+				$('#dialog9').dialog({
+					autoOpen: false,
+					width: 1060,
+                                        height: 600,
+					resizable: true,
+					/*buttons: {
+						"Ok": function() { 
+							$(this).dialog("close"); 
+						}, 
+						"Cancel": function() { 
+							$(this).dialog("close"); 
+						} 
+					}*/
+				});
+				
+				// Dialog Link 9
+				$('#dialog_link9').click(function(){
+					$('#dialog9').dialog('open');
+					return false;
+				});
+                                ///// Dialog 10			
+				$('#dialog10').dialog({
+					autoOpen: false,
+					width: 1060,
+                                        height: 600,
+					resizable: true,
+					/*buttons: {
+						"Ok": function() { 
+							$(this).dialog("close"); 
+						}, 
+						"Cancel": function() { 
+							$(this).dialog("close"); 
+						} 
+					}*/
+				});
+				
+				// Dialog Link 10
+				$('#dialog_link10').click(function(){
+					$('#dialog10').dialog('open');
+					return false;
+				});
+                                ///// Dialog 11			
+				$('#dialog11').dialog({
+					autoOpen: false,
+					width: 1060,
+                                        height: 600,
+					resizable: true,
+					/*buttons: {
+						"Ok": function() { 
+							$(this).dialog("close"); 
+						}, 
+						"Cancel": function() { 
+							$(this).dialog("close"); 
+						} 
+					}*/
+				});
+				
+				// Dialog Link 11
+				$('#dialog_link11').click(function(){
+					$('#dialog11').dialog('open');
+					return false;
+				});
+                                ///// Dialog 12			
+				$('#dialog12').dialog({
+					autoOpen: false,
+					width: 1060,
+                                        height: 600,
+					resizable: true,
+					/*buttons: {
+						"Ok": function() { 
+							$(this).dialog("close"); 
+						}, 
+						"Cancel": function() { 
+							$(this).dialog("close"); 
+						} 
+					}*/
+				});
+				
+				// Dialog Link 12
+				$('#dialog_link12').click(function(){
+					$('#dialog12').dialog('open');
+					return false;
+				});
+                                ///
+                                
+                                ///Login
+                                // login			
+				$('#login').dialog({
+					autoOpen: false,
+					width: 525,
+					resizable: false,
+					/*buttons: {
+						"Ok": function() { 
+							$(this).dialog("close"); 
+						}, 
+						"Cancel": function() { 
+							$(this).dialog("close"); 
+						} 
+					}*/
+				});
+                                // Dialog Link
+				$('#login_link').click(function(){
+					$('#login').dialog('open');
+					return false;
+				});
+				
+				// Register			
+				$('#register').dialog({
+					autoOpen: false,
+					width: 500,
+					resizable: true,
+					/*buttons: {
+						"Ok": function() { 
+							$(this).dialog("close"); 
+						}, 
+						"Cancel": function() { 
+							$(this).dialog("close"); 
+						} 
+					}*/
+				});
+                                // Register Link
+				$('#register_link').click(function(){
+					$('#register').dialog('open');
+					return false;
+				});
+			});
+		</script>
+        </head>
+        <body>
+            <div id="global">
+                <div id="top_bar_head">
+                    <div class="name_container">
+                        <img src="img/g3969.png" alt="logo" style="width: 145px; height: 100px;float: left; margin-right: 5px; margin-top:5px;" />
+                        <br/><br/><a style="font-size: 25px; font-weight: bold; "><h2>Space Explorer</h2></a>
+			<!--<ul id="menu">
+				<li>
+				    <a href="#">Category</a>
+				    <ul>
+					<li><a href="#">Securite</a></li>
+					<li><a href="#">Cadre de vie</a></li>
+					<li><a href="#">Economie</a></li>
+					<li><a href="#">Jeunesse et Sport</a></li>
+					<li><a href="#">Action Sociales</a></li>
+					<li><a href="#">Vie Associative</a></li>
+					<li><a>*************************************************</a></li>
+				    </ul>
+				</li>
+				<li>
+				    <a href="#">Language</a>
+				    <ul>
+					<li><a href="#">Securite</a></li>
+					<li><a href="#">Cadre de vie</a></li>
+					<li><a href="#">Economie</a></li>
+					<li><a href="#">Jeunesse et Sport</a></li>
+					<li><a href="#">Action Sociales</a></li>
+					<li><a href="#">Vie Associative</a></li>
+					<li><a>*************************************************</a></li>
+				    </ul>
+				</li>
+			</ul>
+			-->
                     </div>
-                    <div class="span6">
-                      Fluid 6
+                    <div class="search_container">
+                        <div class="block_registrer">
+                            <?php
+								if(isset($_SESSION['username']))
+									{
+										?> <a href="logout.php" id="login_link1" class="ui-state-default ui-corner-all">Logout</a><?php
+									}
+								else
+									{
+										?><a id="login_link" class="ui-state-default ui-corner-all">Login</a><?php
+									}
+							?>
+                            <a id="register_link" class="ui-state-default ui-corner-all">REGISTER</a>
+							<a id="login_link">ENGLISH</a>
+                            <a id="login_link">FRENCH</a>
+                            </div>
+                       
+                             <div id="login" title="LOGIN">
+								<form method="post" action="login_post.php">
+									<img src="img/bg_world_login.jpg" alt="" style="margin-bottom: 5px;"/>
+									<div class="input_block">   
+										<label class="for_label">USERNAME</label>
+										<input type="text" alt="" class="for_input" name="userName" placeholder="Username"/>
+									</div>
+									<div class="input_block">
+										<label class="for_label">PASSWORD</label>
+										<input type="password" alt="" name="password" class="for_input"/>
+									</div>
+                                
+									<input type="submit" class="for_submit" alt="" value="LOGIN"/>
+									
+									<a href="">Forgot your password?</a><br/>
+									<a href="registration/account.php">Create an Account.</a>
+                             </form>
+							 </div>
+                        
+			
+                        
+			
+                             <div id="register" title="REGISTER">
+								<form onsubmit="return verifForm(this)" method="post" action="register_post.php">
+									<div class="input_block">   
+										<label class="for_label">USERNAME</label>
+										<input type="text" alt="" class="for_input" name="userName" onblur="verifNom(this)"/>
+									</div>
+									
+									<div class="input_block">
+										<label class="for_label">EMAIL</label>
+										<input type="text" alt="" class="for_input" name="email" onblur="verifMail(this)"/>
+									</div>
+                                
+									<div class="input_block">
+										<label class="for_label">PASSWORD</label>
+										<input type="password" alt="" class="for_input" name="password" onblur="verifPass(this)"/>
+									</div>
+									
+									<div class="input_block">
+										<label class="for_label">CONFIRM PASSWORD</label>
+										<input type="password" alt="" class="for_input" name="cpassword" onblur="verifPass1(password,this)"/>
+									</div>
+                                
+									<input type="submit" class="for_submit" alt="" value="REGISTER"/>
+                              </form>
+							 </div>
+                       
+			
+                        
+                                <!--<input type="radio" name="rdio" /><label class="lab_type">IMAGES</label>
+                                <input type="radio" name="rdio" /><label class="lab_type">VIDEOS</label-->
+                            <div id="searchbox">
+								<!--form method="post" action="recherche_post.php"-->
+								<form method="post" action="">
+                                <input id="search" type="text" name="recherche" placeholder="Type here">
+                                <input id="submit" type="submit" value="Search">
+								</form>
+							</div>
+                        
+                    </div> 
+                </div>
+                
+                <div id="head">
+                    
+                </div>
+                
+                <div id="content">
+                    <div id="left_pane">
+                        <div class="block">
+                            <a href="" class="img_back1 blow" style="background: url(<?php echo $tab[0]?>) no-repeat center center;" id="dialog_link1" class="ui-state-default ui-corner-all">
+                            <div class="bottom_span_text"><?php echo $tab2[0] . " <br/>" . "<small>" . $tab1[0] . "</small>"; ?></div>
+							<div class="bottom_span"></div>
+							<div id="dialog1" title="Dialog Title">
+									<p><?php echo $tab2[0]?> <?php echo $tab1[0]?> !!!</p>
+									<div style="float: left;">
+                                        <img src="<?php echo $tab[0]?>" alt=""/>
+                                    </div>
+				    
+								<!-- FOR THE MAP-->
+												<div id="map_canvas" style="float: right; background: #000; width: 380px; height: 300px; margin:auto;">
+													
+												</div>
+												<!-- END THE MAP-->
+												
+												<!--for textarea-->
+												<div style="background: #000; float: right; width: 380px; margin-left: 10px; height: 70px; margin-bottom: 10px;">
+													<form action="comment_post.php" method="post">
+													<!--form action="" method="post"-->
+														<fieldset id="fieldset_uregister"> 
+															<legend>Add comments</legend>
+															<?php
+																try
+																	{	
+																		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+																		$bdd = new PDO('mysql:host=localhost;dbname=logipamo_nasa','logipamo_esih','esih007',$pdo_options);
+																		$a=$tab[0];
+																		$req = $bdd->query("SELECT * FROM comments where path_file = '$a'");
+																		if($donnees = $req->fetch()){
+																			?>
+																				Last comment: <?php echo $donnees['name_user'];?> <?php echo $donnees['date_comment'];?><br/>
+																				<label><?php echo $donnees['comment'];?></label>
+																			<?php
+																		}
+																	}
+																catch(Exception $e)
+																	{
+																		die('Erreur : '.$e->getMessage());
+																	}
+																
+																if(isset($_SESSION['username']))
+																	{
+																		?>
+																			<input type="text" class="input_comment" style=" width: 250px " alt="Comment" maxlength="256" name="comment"/>
+																			<input type="hidden" value="<?php echo $tab[0];?>" name="file">
+																			<input type="submit" class="submit_btn" alt="Submit Buttton" name="submit" value="Submit" />
+																		<?php
+																	}
+																else
+																	{
+																		?>
+																			<input type="text" readonly class="input_comment" style=" width: 200px " alt="Comment" maxlength="256" name="comment"/>
+																			<button href="index.php">Login to comment</button>
+																		<?php
+																	}
+															?>
+														</fieldset>
+													</form>
+												</div>
+												<!--END textarea-->
+							
+												<!--for ICON-->
+												<div style="background: #000; float: right; width: 380px; margin-left: 10px; height: 70px; margin-bottom: 10px;">
+													<form action="tag_post.php" method="post">
+													<!--form action="" method="post"-->
+														<fieldset id="fieldset_uregister"> 
+															<legend>Add tags</legend>
+															<?php
+																if(isset($_SESSION['username']))
+																	{
+																		?>
+																			<input type="text" class="input_comment" style=" width: 250px " alt="Tag" maxlength="45" name="tag"/>
+																			<input type="hidden" value="<?php echo $tab[0];?>" name="file">
+																			<input type="submit" class="submit_btn" alt="Submit Button" name="submit" value="Submit" />
+																		<?php
+																	}
+																else
+																	{
+																		?>
+																			<input type="text" readonly class="input_comment" style=" width: 200px " alt="Tag" maxlength="45" name="tag"/>
+																			<button href="index.php">Login to tag</button>
+																		<?php
+																	}
+															?>
+															
+														</fieldset>
+													</form>
+												</div>
+												<!--END ICON-->
+										</div>
+						</a>
+                            
+						<a href="" class="img_back2 blow" style="background: url(<?php echo $tab[1]?>) no-repeat center center;" id="dialog_link2" class="ui-state-default ui-corner-all">
+                            <div class="bottom_span_text"><?php echo $tab2[1]  . " <br/>" . "<small>" . $tab1[1] . "</small>";?></div>
+							<div class="bottom_span"></div>
+							<div id="dialog2" title="Dialog Title">
+								<p><?php echo $tab2[1]?> <?php echo $tab1[1]?> !!!</p>
+								<div style="float: left;">
+									<img src="<?php echo $tab[1]?>" alt=""/>
+								</div>
+				    
+								<!-- FOR THE MAP-->
+												<div id="map_canvas2" style="float: right; width: 380px; height: 300px; background: #000; margin-left: 10px; margin-bottom: 10px;">
+												
+												</div>
+												<!-- END THE MAP-->
+				    
+												<!--for textarea-->
+												<div style="background: #000; float: right; width: 380px; margin-left: 10px; height: 70px; margin-bottom: 10px;">
+													<form action="comment_post.php" method="post">
+													<!--form action="" method="post"-->
+														<fieldset id="fieldset_uregister"> 
+															<legend>Add comments</legend>
+															<?php
+																try
+																	{	
+																		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+																		$bdd = new PDO('mysql:host=localhost;dbname=logipamo_nasa','logipamo_esih','esih007',$pdo_options);
+																		$a=$tab[1];
+																		$req = $bdd->query("SELECT * FROM comments where path_file = '$a'");
+																		if($donnees = $req->fetch()){
+																			?>
+																				Last comment: <?php echo $donnees['name_user'];?> <?php echo $donnees['date_comment'];?><br/>
+																				<label><?php echo $donnees['comment'];?></label>
+																			<?php
+																		}
+																	}
+																catch(Exception $e)
+																	{
+																		die('Erreur : '.$e->getMessage());
+																	}
+																
+																if(isset($_SESSION['username']))
+																	{
+																		?>
+																			<input type="text" class="input_comment" style=" width: 250px " alt="Comment" maxlength="256" name="comment"/>
+																			<input type="hidden" value="<?php echo $tab[0];?>" name="file">
+																			<input type="submit" class="submit_btn" alt="Submit Buttton" name="submit" value="Submit" />
+																		<?php
+																	}
+																else
+																	{
+																		?>
+																			<input type="text" readonly class="input_comment" style=" width: 200px " alt="Comment" maxlength="256" name="comment"/>
+																			<button href="index.php">Login to comment</button>
+																		<?php
+																	}
+															?>
+														</fieldset>
+													</form>
+												</div>
+												<!--END textarea-->
+							
+												<!--for ICON-->
+												<div style="background: #000; float: right; width: 380px; margin-left: 10px; height: 70px; margin-bottom: 10px;">
+													<form action="tag_post.php" method="post">
+													<!--form action="" method="post"-->
+														<fieldset id="fieldset_uregister"> 
+															<legend>Add tags</legend>
+															<?php
+																if(isset($_SESSION['username']))
+																	{
+																		?>
+																			<input type="text" class="input_comment" style=" width: 250px " alt="Tag" maxlength="45" name="tag"/>
+																			<input type="hidden" value="<?php echo $tab[0];?>" name="file">
+																			<input type="submit" class="submit_btn" alt="Submit Button" name="submit" value="Submit" />
+																		<?php
+																	}
+																else
+																	{
+																		?>
+																			<input type="text" readonly class="input_comment" style=" width: 200px " alt="Tag" maxlength="45" name="tag"/>
+																			<button href="index.php">Login to tag</button>
+																		<?php
+																	}
+															?>
+															
+														</fieldset>
+													</form>
+												</div>
+												<!--END ICON-->
+										</div>
+						</a>
+                            
+						<a href="" class="img_back3 blow" style="background: url(<?php echo $tab[2]?>) no-repeat center center;" id="dialog_link3" class="ui-state-default ui-corner-all">
+							<div class="bottom_span_text"><?php echo $tab2[2]  . " <br/>" . "<small>" . $tab1[2] . "</small>";?></div>
+							<div class="bottom_span"></div>
+							<div id="dialog3" title="Dialog Title">
+								<p><?php echo $tab2[2]?> <?php echo $tab1[2]?> !!!</p>
+								<div style="float: left;">
+									<img src="<?php echo $tab[2]?>" alt=""/>
+								</div>
+								
+								<!-- FOR THE MAP-->
+												<div id="map_canvas3" style="float: right; width: 380px; height: 300px; background: #000; margin-left: 10px; margin-bottom: 10px;">
+                                            
+												</div>
+												<!-- END THE MAP-->
+						
+												<!--for textarea-->
+												<div style="background: #000; float: right; width: 380px; margin-left: 10px; height: 70px; margin-bottom: 10px;">
+													<form action="comment_post.php" method="post">
+													<!--form action="" method="post"-->
+														<fieldset id="fieldset_uregister"> 
+															<legend>Add comments</legend>
+															<?php
+																try
+																	{	
+																		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+																		$bdd = new PDO('mysql:host=localhost;dbname=logipamo_nasa','logipamo_esih','esih007',$pdo_options);
+																		$a=$tab[2];
+																		$req = $bdd->query("SELECT * FROM comments where path_file = '$a'");
+																		if($donnees = $req->fetch()){
+																			?>
+																				Last comment: <?php echo $donnees['name_user'];?> <?php echo $donnees['date_comment'];?><br/>
+																				<label><?php echo $donnees['comment'];?></label>
+																			<?php
+																		}
+																	}
+																catch(Exception $e)
+																	{
+																		die('Erreur : '.$e->getMessage());
+																	}
+																
+																if(isset($_SESSION['username']))
+																	{
+																		?>
+																			<input type="text" class="input_comment" style=" width: 250px " alt="Comment" maxlength="256" name="comment"/>
+																			<input type="hidden" value="<?php echo $tab[0];?>" name="file">
+																			<input type="submit" class="submit_btn" alt="Submit Buttton" name="submit" value="Submit" />
+																		<?php
+																	}
+																else
+																	{
+																		?>
+																			<input type="text" readonly class="input_comment" style=" width: 200px " alt="Comment" maxlength="256" name="comment"/>
+																			<button href="index.php">Login to comment</button>
+																		<?php
+																	}
+															?>
+														</fieldset>
+													</form>
+												</div>
+												<!--END textarea-->
+							
+												<!--for ICON-->
+												<div style="background: #000; float: right; width: 380px; margin-left: 10px; height: 70px; margin-bottom: 10px;">
+													<form action="tag_post.php" method="post">
+													<!--form action="" method="post"-->
+														<fieldset id="fieldset_uregister"> 
+															<legend>Add tags</legend>
+															<?php
+																if(isset($_SESSION['username']))
+																	{
+																		?>
+																			<input type="text" class="input_comment" style=" width: 250px " alt="Tag" maxlength="45" name="tag"/>
+																			<input type="hidden" value="<?php echo $tab[2];?>" name="file">
+																			<input type="submit" class="submit_btn" alt="Submit Button" name="submit" value="Submit" />
+																		<?php
+																	}
+																else
+																	{
+																		?>
+																			<input type="text" readonly class="input_comment" style=" width: 200px " alt="Tag" maxlength="45" name="tag"/>
+																			<button href="index.php">Login to tag</button>
+																		<?php
+																	}
+															?>
+															
+														</fieldset>
+													</form>
+												</div>
+												<!--END ICON-->
+                                    </div>
+						</a>
+					</div>
+                        
+					<div class="block">
+						<a href="" class="img_back4 blow" style="background: url(<?php echo $tab[3]?>) no-repeat center center;" id="dialog_link4" class="ui-state-default ui-corner-all">
+							<div class="bottom_span_text"><?php echo $tab2[3]  . " <br/>" . "<small>" . $tab1[3] . "</small>";?></div>
+							<div class="bottom_span"></div>
+							<div id="dialog4" title="Dialog Title">
+								<p><?php echo $tab2[3]?> <?php echo $tab1[3]?> !!!</p>
+								<div style="float: left;">
+									<img src="<?php echo $tab[3]?>" alt=""/>
+								</div>
+				
+								<!-- FOR THE MAP-->
+										<div id="map_canvas4" style="float: right; width: 380px; height: 300px; background: #000; margin-left: 10px; margin-bottom: 10px;">
+                                            
+                                        </div>
+										<!-- END THE MAP-->
+				    
+												<!--for textarea-->
+												<div style="background: #000; float: right; width: 380px; margin-left: 10px; height: 70px; margin-bottom: 10px;">
+													<form action="comment_post.php" method="post">
+													<!--form action="" method="post"-->
+														<fieldset id="fieldset_uregister"> 
+															<legend>Add comments</legend>
+															<?php
+																try
+																	{	
+																		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+																		$bdd = new PDO('mysql:host=localhost;dbname=logipamo_nasa','logipamo_esih','esih007',$pdo_options);
+																		$a=$tab[3];
+																		$req = $bdd->query("SELECT * FROM comments where path_file = '$a'");
+																		if($donnees = $req->fetch()){
+																			?>
+																				Last comment: <?php echo $donnees['name_user'];?> <?php echo $donnees['date_comment'];?><br/>
+																				<label><?php echo $donnees['comment'];?></label>
+																			<?php
+																		}
+																	}
+																catch(Exception $e)
+																	{
+																		die('Erreur : '.$e->getMessage());
+																	}
+																
+																if(isset($_SESSION['username']))
+																	{
+																		?>
+																			<input type="text" class="input_comment" style=" width: 250px " alt="Comment" maxlength="256" name="comment"/>
+																			<input type="hidden" value="<?php echo $tab[3];?>" name="file">
+																			<input type="submit" class="submit_btn" alt="Submit Buttton" name="submit" value="Submit" />
+																		<?php
+																	}
+																else
+																	{
+																		?>
+																			<input type="text" readonly class="input_comment" style=" width: 200px " alt="Comment" maxlength="256" name="comment"/>
+																			<button href="index.php">Login to comment</button>
+																		<?php
+																	}
+															?>
+														</fieldset>
+													</form>
+												</div>
+												<!--END textarea-->
+							
+												<!--for ICON-->
+												<div style="background: #000; float: right; width: 380px; margin-left: 10px; height: 70px; margin-bottom: 10px;">
+													<form action="tag_post.php" method="post">
+													<!--form action="" method="post"-->
+														<fieldset id="fieldset_uregister"> 
+															<legend>Add tags</legend>
+															<?php
+																if(isset($_SESSION['username']))
+																	{
+																		?>
+																			<input type="text" class="input_comment" style=" width: 250px " alt="Tag" maxlength="45" name="tag"/>
+																			<input type="hidden" value="<?php echo $tab[3];?>" name="file">
+																			<input type="submit" class="submit_btn" alt="Submit Button" name="submit" value="Submit" />
+																		<?php
+																	}
+																else
+																	{
+																		?>
+																			<input type="text" readonly class="input_comment" style=" width: 200px " alt="Tag" maxlength="45" name="tag"/>
+																			<button href="index.php">Login to tag</button>
+																		<?php
+																	}
+															?>
+															
+														</fieldset>
+													</form>
+												</div>
+												<!--END ICON-->
+                                    </div>
+						</a>
+						
+						<a href="" class="img_back5 blow" style="background: url(<?php echo $tab[4]?>) no-repeat center center;" id="dialog_link5" class="ui-state-default ui-corner-all">
+							<div class="bottom_span_text"><?php echo $tab2[4]  . " <br/>" . "<small>" . $tab1[4] . "</small>";?></div>
+							<div class="bottom_span"></div>
+							<div id="dialog5" title="Dialog Title">
+								<p><?php echo $tab2[4]?> <?php echo $tab1[4]?> !!!</p>
+								<div style="float: left;">
+									<img src="<?php echo $tab[4]?>" alt=""/>
+								</div>
+				
+								 <!-- FOR THE MAP-->
+					<div id="map_canvas5" style="float: right; width: 380px; height: 300px; background: #000; margin-left: 10px; margin-bottom: 10px;">
+                                            
+                                        </div>
+				    <!-- END THE MAP-->
+				    
+												<!--for textarea-->
+												<div style="background: #000; float: right; width: 380px; margin-left: 10px; height: 70px; margin-bottom: 10px;">
+													<form action="comment_post.php" method="post">
+													<!--form action="" method="post"-->
+														<fieldset id="fieldset_uregister"> 
+															<legend>Add comments</legend>
+															<?php
+																try
+																	{	
+																		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+																		$bdd = new PDO('mysql:host=localhost;dbname=logipamo_nasa','logipamo_esih','esih007',$pdo_options);
+																		$a=$tab[4];
+																		$req = $bdd->query("SELECT * FROM comments where path_file = '$a'");
+																		if($donnees = $req->fetch()){
+																			?>
+																				Last comment: <?php echo $donnees['name_user'];?> <?php echo $donnees['date_comment'];?><br/>
+																				<label><?php echo $donnees['comment'];?></label>
+																			<?php
+																		}
+																	}
+																catch(Exception $e)
+																	{
+																		die('Erreur : '.$e->getMessage());
+																	}
+																
+																if(isset($_SESSION['username']))
+																	{
+																		?>
+																			<input type="text" class="input_comment" style=" width: 250px " alt="Comment" maxlength="256" name="comment"/>
+																			<input type="hidden" value="<?php echo $tab[4];?>" name="file">
+																			<input type="submit" class="submit_btn" alt="Submit Buttton" name="submit" value="Submit" />
+																		<?php
+																	}
+																else
+																	{
+																		?>
+																			<input type="text" readonly class="input_comment" style=" width: 200px " alt="Comment" maxlength="256" name="comment"/>
+																			<button href="index.php">Login to comment</button>
+																		<?php
+																	}
+															?>
+														</fieldset>
+													</form>
+												</div>
+												<!--END textarea-->
+							
+												<!--for ICON-->
+												<div style="background: #000; float: right; width: 380px; margin-left: 10px; height: 70px; margin-bottom: 10px;">
+													<form action="tag_post.php" method="post">
+													<!--form action="" method="post"-->
+														<fieldset id="fieldset_uregister"> 
+															<legend>Add tags</legend>
+															<?php
+																if(isset($_SESSION['username']))
+																	{
+																		?>
+																			<input type="text" class="input_comment" style=" width: 250px " alt="Tag" maxlength="45" name="tag"/>
+																			<input type="hidden" value="<?php echo $tab[4];?>" name="file">
+																			<input type="submit" class="submit_btn" alt="Submit Button" name="submit" value="Submit" />
+																		<?php
+																	}
+																else
+																	{
+																		?>
+																			<input type="text" readonly class="input_comment" style=" width: 200px " alt="Tag" maxlength="45" name="tag"/>
+																			<button href="index.php">Login to tag</button>
+																		<?php
+																	}
+															?>
+															
+														</fieldset>
+													</form>
+												</div>
+												<!--END ICON-->
+                                    </div>
+						</a>
+						
+						<a href="" class="img_back6 blow" style="background: url(<?php echo $tab[5]?>) no-repeat center center;" id="dialog_link6" class="ui-state-default ui-corner-all">
+							<div class="bottom_span_text"><?php echo $tab2[5]  . " <br/>" . "<small>" . $tab1[5] . "</small>";?></div>
+							<div class="bottom_span"></div>
+							<div id="dialog6" title="Dialog Title">
+								<p><?php echo $tab2[5]?> <?php echo $tab1[5]?> !!!</p>
+								<div style="float: left;">
+									<img src="<?php echo $tab[5]?>" alt=""/>
+								</div>
+				
+								<!-- FOR THE MAP-->
+					<div id="map_canvas6" style="float: right; width: 380px; height: 300px; background: #000; margin-left: 10px; margin-bottom: 10px;">
+                                            
+                                        </div>
+				    <!-- END THE MAP-->
+				    
+												<!--for textarea-->
+												<div style="background: #000; float: right; width: 380px; margin-left: 10px; height: 70px; margin-bottom: 10px;">
+													<form action="comment_post.php" method="post">
+													<!--form action="" method="post"-->
+														<fieldset id="fieldset_uregister"> 
+															<legend>Add comments</legend>
+															<?php
+																try
+																	{	
+																		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+																		$bdd = new PDO('mysql:host=localhost;dbname=logipamo_nasa','logipamo_esih','esih007',$pdo_options);
+																		$a=$tab[5];
+																		$req = $bdd->query("SELECT * FROM comments where path_file = '$a'");
+																		if($donnees = $req->fetch()){
+																			?>
+																				Last comment: <?php echo $donnees['name_user'];?> <?php echo $donnees['date_comment'];?><br/>
+																				<label><?php echo $donnees['comment'];?></label>
+																			<?php
+																		}
+																	}
+																catch(Exception $e)
+																	{
+																		die('Erreur : '.$e->getMessage());
+																	}
+																
+																if(isset($_SESSION['username']))
+																	{
+																		?>
+																			<input type="text" class="input_comment" style=" width: 250px " alt="Comment" maxlength="256" name="comment"/>
+																			<input type="hidden" value="<?php echo $tab[5];?>" name="file">
+																			<input type="submit" class="submit_btn" alt="Submit Buttton" name="submit" value="Submit" />
+																		<?php
+																	}
+																else
+																	{
+																		?>
+																			<input type="text" readonly class="input_comment" style=" width: 200px " alt="Comment" maxlength="256" name="comment"/>
+																			<button href="index.php">Login to comment</button>
+																		<?php
+																	}
+															?>
+														</fieldset>
+													</form>
+												</div>
+												<!--END textarea-->
+							
+												<!--for ICON-->
+												<div style="background: #000; float: right; width: 380px; margin-left: 10px; height: 70px; margin-bottom: 10px;">
+													<form action="tag_post.php" method="post">
+													<!--form action="" method="post"-->
+														<fieldset id="fieldset_uregister"> 
+															<legend>Add tags</legend>
+															<?php
+																if(isset($_SESSION['username']))
+																	{
+																		?>
+																			<input type="text" class="input_comment" style=" width: 250px " alt="Tag" maxlength="45" name="tag"/>
+																			<input type="hidden" value="<?php echo $tab[5];?>" name="file">
+																			<input type="submit" class="submit_btn" alt="Submit Button" name="submit" value="Submit" />
+																		<?php
+																	}
+																else
+																	{
+																		?>
+																			<input type="text" readonly class="input_comment" style=" width: 200px " alt="Tag" maxlength="45" name="tag"/>
+																			<button href="index.php">Login to tag</button>
+																		<?php
+																	}
+															?>
+															
+														</fieldset>
+													</form>
+												</div>
+												<!--END ICON-->
+                                    </div>
+						</a>
                     </div>
-                  </div>
+                        
+					<div class="block">
+						<a href="" class="img_back7 blow" style="background: url(<?php echo $tab[6]?>) no-repeat center center;" id="dialog_link7" class="ui-state-default ui-corner-all">
+							<div class="bottom_span_text"><?php echo $tab2[6]  . " <br/>" . "<small>" . $tab1[6] . "</small>";?></div>
+							<div class="bottom_span"></div>
+							<div id="dialog7" title="Dialog Title">
+								<p><?php echo $tab2[6]?> <?php echo $tab1[6]?> !!!</p>
+								<div style="float: left;">
+									<img src="<?php echo $tab[6]?>" alt=""/>
+								</div>
+				
+							<!-- FOR THE MAP-->
+					<div id="map_canvas7" style="float: right; width: 500px; height: 300px; background: #000; margin-left: 10px; margin-bottom: 10px;">
+                                            
+                                        </div>
+				    <!-- END THE MAP-->
+				    
+												<!--for textarea-->
+												<div style="background: #000; float: right; width: 380px; margin-left: 10px; height: 70px; margin-bottom: 10px;">
+													<form action="comment_post.php" method="post">
+													<!--form action="" method="post"-->
+														<fieldset id="fieldset_uregister"> 
+															<legend>Add comments</legend>
+															<?php
+																try
+																	{	
+																		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+																		$bdd = new PDO('mysql:host=localhost;dbname=logipamo_nasa','logipamo_esih','esih007',$pdo_options);
+																		$a=$tab[6];
+																		$req = $bdd->query("SELECT * FROM comments where path_file = '$a'");
+																		if($donnees = $req->fetch()){
+																			?>
+																				Last comment: <?php echo $donnees['name_user'];?> <?php echo $donnees['date_comment'];?><br/>
+																				<label><?php echo $donnees['comment'];?></label>
+																			<?php
+																		}
+																	}
+																catch(Exception $e)
+																	{
+																		die('Erreur : '.$e->getMessage());
+																	}
+																
+																if(isset($_SESSION['username']))
+																	{
+																		?>
+																			<input type="text" class="input_comment" style=" width: 250px " alt="Comment" maxlength="256" name="comment"/>
+																			<input type="hidden" value="<?php echo $tab[6];?>" name="file">
+																			<input type="submit" class="submit_btn" alt="Submit Buttton" name="submit" value="Submit" />
+																		<?php
+																	}
+																else
+																	{
+																		?>
+																			<input type="text" readonly class="input_comment" style=" width: 200px " alt="Comment" maxlength="256" name="comment"/>
+																			<button href="index.php">Login to comment</button>
+																		<?php
+																	}
+															?>
+														</fieldset>
+													</form>
+												</div>
+												<!--END textarea-->
+							
+												<!--for ICON-->
+												<div style="background: #000; float: right; width: 380px; margin-left: 10px; height: 70px; margin-bottom: 10px;">
+													<form action="tag_post.php" method="post">
+													<!--form action="" method="post"-->
+														<fieldset id="fieldset_uregister"> 
+															<legend>Add tags</legend>
+															<?php
+																if(isset($_SESSION['username']))
+																	{
+																		?>
+																			<input type="text" class="input_comment" style=" width: 250px " alt="Tag" maxlength="45" name="tag"/>
+																			<input type="hidden" value="<?php echo $tab[6];?>" name="file">
+																			<input type="submit" class="submit_btn" alt="Submit Button" name="submit" value="Submit" />
+																		<?php
+																	}
+																else
+																	{
+																		?>
+																			<input type="text" readonly class="input_comment" style=" width: 200px " alt="Tag" maxlength="45" name="tag"/>
+																			<button href="index.php">Login to tag</button>
+																		<?php
+																	}
+															?>
+															
+														</fieldset>
+													</form>
+												</div>
+												<!--END ICON-->
+                                    </div>
+					</a>
+					<a href="" class="img_back8 blow" style="background: url(<?php echo $tab[7]?>) no-repeat center center;" id="dialog_link8" class="ui-state-default ui-corner-all">
+						<div class="bottom_span_text"><?php echo $tab2[7]  . " <br/>" . "<small>" . $tab1[7] . "</small>";?></div>
+							<div class="bottom_span"></div>
+							<div id="dialog8" title="Dialog Title">
+								<p><?php echo $tab2[7]?> <?php echo $tab1[7]?> !!!</p>
+								<div style="float: left;">
+									<img src="<?php echo $tab[7]?>" alt=""/>
+								</div>
+						
+							<!-- FOR THE MAP-->
+					<div id="map_canvas8" style="float: right; width: 380px; height: 300px; background: #000; margin-left: 10px; margin-bottom: 10px;">
+                                            
+                                        </div>
+				    <!-- END THE MAP-->
+				    
+												<!--for textarea-->
+												<div style="background: #000; float: right; width: 380px; margin-left: 10px; height: 70px; margin-bottom: 10px;">
+													<form action="comment_post.php" method="post">
+													<!--form action="" method="post"-->
+														<fieldset id="fieldset_uregister"> 
+															<legend>Add comments</legend>
+															<?php
+																try
+																	{	
+																		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+																		$bdd = new PDO('mysql:host=localhost;dbname=logipamo_nasa','logipamo_esih','esih007',$pdo_options);
+																		$a=$tab[7];
+																		$req = $bdd->query("SELECT * FROM comments where path_file = '$a'");
+																		if($donnees = $req->fetch()){
+																			?>
+																				Last comment: <?php echo $donnees['name_user'];?> <?php echo $donnees['date_comment'];?><br/>
+																				<label><?php echo $donnees['comment'];?></label>
+																			<?php
+																		}
+																	}
+																catch(Exception $e)
+																	{
+																		die('Erreur : '.$e->getMessage());
+																	}
+																
+																if(isset($_SESSION['username']))
+																	{
+																		?>
+																			<input type="text" class="input_comment" style=" width: 250px " alt="Comment" maxlength="256" name="comment"/>
+																			<input type="hidden" value="<?php echo $tab[7];?>" name="file">
+																			<input type="submit" class="submit_btn" alt="Submit Buttton" name="submit" value="Submit" />
+																		<?php
+																	}
+																else
+																	{
+																		?>
+																			<input type="text" readonly class="input_comment" style=" width: 200px " alt="Comment" maxlength="256" name="comment"/>
+																			<button href="index.php">Login to comment</button>
+																		<?php
+																	}
+															?>
+														</fieldset>
+													</form>
+												</div>
+												<!--END textarea-->
+							
+												<!--for ICON-->
+												<div style="background: #000; float: right; width: 380px; margin-left: 10px; height: 70px; margin-bottom: 10px;">
+													<form action="tag_post.php" method="post">
+													<!--form action="" method="post"-->
+														<fieldset id="fieldset_uregister"> 
+															<legend>Add tags</legend>
+															<?php
+																if(isset($_SESSION['username']))
+																	{
+																		?>
+																			<input type="text" class="input_comment" style=" width: 250px " alt="Tag" maxlength="45" name="tag"/>
+																			<input type="hidden" value="<?php echo $tab[7];?>" name="file">
+																			<input type="submit" class="submit_btn" alt="Submit Button" name="submit" value="Submit" />
+																		<?php
+																	}
+																else
+																	{
+																		?>
+																			<input type="text" readonly class="input_comment" style=" width: 200px " alt="Tag" maxlength="45" name="tag"/>
+																			<button href="index.php">Login to tag</button>
+																		<?php
+																	}
+															?>
+															
+														</fieldset>
+													</form>
+												</div>
+												<!--END ICON-->
+                                    </div>
+					</a>
+                    
+					<a href="" class="img_back9 blow" style="background: url(<?php echo $tab[8]?>) no-repeat center center;" id="dialog_link9" class="ui-state-default ui-corner-all">
+						<div class="bottom_span_text"><?php echo $tab2[8]  . " <br/>" . "<small>" . $tab1[8] . "</small>";?></div>
+						<div class="bottom_span"></div>
+						<div id="dialog9" title="Dialog Title">
+							<p><?php echo $tab2[8]?> <?php echo $tab1[8]?> !!!</p>
+							<div style="float: left;">
+								<img src="<?php echo $tab[8]?>" alt=""/>
+							</div>
+							
+							<!-- FOR THE MAP-->
+					<div id="map_canvas9" style="float: right; width: 380px; height: 300px; background: #000; margin-left: 10px; margin-bottom: 10px;">
+                                            
+                                        </div>
+				    <!-- END THE MAP-->
+				    
+												<!--for textarea-->
+												<div style="background: #000; float: right; width: 380px; margin-left: 10px; height: 70px; margin-bottom: 10px;">
+													<form action="comment_post.php" method="post">
+													<!--form action="" method="post"-->
+														<fieldset id="fieldset_uregister"> 
+															<legend>Add comments</legend>
+															<?php
+																try
+																	{	
+																		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+																		$bdd = new PDO('mysql:host=localhost;dbname=logipamo_nasa','logipamo_esih','esih007',$pdo_options);
+																		$a=$tab[8];
+																		$req = $bdd->query("SELECT * FROM comments where path_file = '$a'");
+																		if($donnees = $req->fetch()){
+																			?>
+																				Last comment: <?php echo $donnees['name_user'];?> <?php echo $donnees['date_comment'];?><br/>
+																				<label><?php echo $donnees['comment'];?></label>
+																			<?php
+																		}
+																	}
+																catch(Exception $e)
+																	{
+																		die('Erreur : '.$e->getMessage());
+																	}
+																
+																if(isset($_SESSION['username']))
+																	{
+																		?>
+																			<input type="text" class="input_comment" style=" width: 250px " alt="Comment" maxlength="256" name="comment"/>
+																			<input type="hidden" value="<?php echo $tab[8];?>" name="file">
+																			<input type="submit" class="submit_btn" alt="Submit Buttton" name="submit" value="Submit" />
+																		<?php
+																	}
+																else
+																	{
+																		?>
+																			<input type="text" readonly class="input_comment" style=" width: 200px " alt="Comment" maxlength="256" name="comment"/>
+																			<button href="index.php">Login to comment</button>
+																		<?php
+																	}
+															?>
+														</fieldset>
+													</form>
+												</div>
+												<!--END textarea-->
+							
+												<!--for ICON-->
+												<div style="background: #000; float: right; width: 380px; margin-left: 10px; height: 70px; margin-bottom: 10px;">
+													<form action="tag_post.php" method="post">
+													<!--form action="" method="post"-->
+														<fieldset id="fieldset_uregister"> 
+															<legend>Add tags</legend>
+															<?php
+																if(isset($_SESSION['username']))
+																	{
+																		?>
+																			<input type="text" class="input_comment" style=" width: 250px " alt="Tag" maxlength="45" name="tag"/>
+																			<input type="hidden" value="<?php echo $tab[8];?>" name="file">
+																			<input type="submit" class="submit_btn" alt="Submit Button" name="submit" value="Submit" />
+																		<?php
+																	}
+																else
+																	{
+																		?>
+																			<input type="text" readonly class="input_comment" style=" width: 200px " alt="Tag" maxlength="45" name="tag"/>
+																			<button href="index.php">Login to tag</button>
+																		<?php
+																	}
+															?>
+															
+														</fieldset>
+													</form>
+												</div>
+												<!--END ICON-->
+                                    </div>
+					</a>
+				</div>
+                        
+				<div class="block">
+					<a href="" class="img_back10 blow" style="background: url(<?php echo $tab[9]?>) no-repeat center center;" id="dialog_link10" class="ui-state-default ui-corner-all">
+						<div class="bottom_span_text"><?php echo $tab2[9]  . " <br/>" . "<small>" . $tab1[9] . "</small>";?></div>
+						<div class="bottom_span"></div>
+						<div id="dialog10" title="Dialog Title">
+							<p><?php echo $tab2[9]?> <?php echo $tab1[9]?> !!!</p>
+							<div style="float: left;">
+								<img src="<?php echo $tab[9]?>" alt=""/>
+							</div>
+				    
+							<!-- FOR THE MAP-->
+					<div id="map_canvas10" style="float: right; width: 380px; height: 300px; background: #000; margin-left: 10px; margin-bottom: 10px;">
+                                            
+                                        </div>
+				    <!-- END THE MAP-->
+				    
+												<!--for textarea-->
+												<div style="background: #000; float: right; width: 380px; margin-left: 10px; height: 70px; margin-bottom: 10px;">
+													<form action="comment_post.php" method="post">
+													<!--form action="" method="post"-->
+														<fieldset id="fieldset_uregister"> 
+															<legend>Add comments</legend>
+															<?php
+																try
+																	{	
+																		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+																		$bdd = new PDO('mysql:host=localhost;dbname=logipamo_nasa','logipamo_esih','esih007',$pdo_options);
+																		$a=$tab[9];
+																		$req = $bdd->query("SELECT * FROM comments where path_file = '$a'");
+																		if($donnees = $req->fetch()){
+																			?>
+																				Last comment: <?php echo $donnees['name_user'];?> <?php echo $donnees['date_comment'];?><br/>
+																				<label><?php echo $donnees['comment'];?></label>
+																			<?php
+																		}
+																	}
+																catch(Exception $e)
+																	{
+																		die('Erreur : '.$e->getMessage());
+																	}
+																
+																if(isset($_SESSION['username']))
+																	{
+																		?>
+																			<input type="text" class="input_comment" style=" width: 250px " alt="Comment" maxlength="256" name="comment"/>
+																			<input type="hidden" value="<?php echo $tab[9];?>" name="file">
+																			<input type="submit" class="submit_btn" alt="Submit Buttton" name="submit" value="Submit" />
+																		<?php
+																	}
+																else
+																	{
+																		?>
+																			<input type="text" readonly class="input_comment" style=" width: 200px " alt="Comment" maxlength="256" name="comment"/>
+																			<button href="index.php">Login to comment</button>
+																		<?php
+																	}
+															?>
+														</fieldset>
+													</form>
+												</div>
+												<!--END textarea-->
+							
+												<!--for ICON-->
+												<div style="background: #000; float: right; width: 380px; margin-left: 10px; height: 70px; margin-bottom: 10px;">
+													<form action="tag_post.php" method="post">
+													<!--form action="" method="post"-->
+														<fieldset id="fieldset_uregister"> 
+															<legend>Add tags</legend>
+															<?php
+																if(isset($_SESSION['username']))
+																	{
+																		?>
+																			<input type="text" class="input_comment" style=" width: 250px " alt="Tag" maxlength="45" name="tag"/>
+																			<input type="hidden" value="<?php echo $tab[9];?>" name="file">
+																			<input type="submit" class="submit_btn" alt="Submit Button" name="submit" value="Submit" />
+																		<?php
+																	}
+																else
+																	{
+																		?>
+																			<input type="text" readonly class="input_comment" style=" width: 200px " alt="Tag" maxlength="45" name="tag"/>
+																			<button href="index.php">Login to tag</button>
+																		<?php
+																	}
+															?>
+															
+														</fieldset>
+													</form>
+												</div>
+												<!--END ICON-->
+                                    </div>
+					</a>
+					
+					<a href="" class="img_back11 blow" style="background: url(<?php echo $tab[10]?>) no-repeat center center;" id="dialog_link11" class="ui-state-default ui-corner-all">
+						<div class="bottom_span_text"><?php echo $tab2[10]  . " <br/>" . "<small>" . $tab1[10] . "</small>";?></div>
+						<div class="bottom_span"></div>
+						<div id="dialog11" title="Dialog Title">
+							<p><?php echo $tab2[10]?> <?php echo $tab1[10]?> !!!</p>
+							<div style="float: left;">
+								<img src="<?php echo $tab[10]?>" alt=""/>
+							</div>
+				
+						<!-- FOR THE MAP-->
+					<div id="map_canvas11" style="float: right; width: 380px; height: 300px; background: #000; margin-left: 10px; margin-bottom: 10px;">
+                                            
+                                        </div>
+				    <!-- END THE MAP-->
+				    
+												<!--for textarea-->
+												<div style="background: #000; float: right; width: 380px; margin-left: 10px; height: 70px; margin-bottom: 10px;">
+													<form action="comment_post.php" method="post">
+													<!--form action="" method="post"-->
+														<fieldset id="fieldset_uregister"> 
+															<legend>Add comments</legend>
+															<?php
+																try
+																	{	
+																		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+																		$bdd = new PDO('mysql:host=localhost;dbname=logipamo_nasa','logipamo_esih','esih007',$pdo_options);
+																		$a=$tab[10];
+																		$req = $bdd->query("SELECT * FROM comments where path_file = '$a'");
+																		if($donnees = $req->fetch()){
+																			?>
+																				Last comment: <?php echo $donnees['name_user'];?> <?php echo $donnees['date_comment'];?><br/>
+																				<label><?php echo $donnees['comment'];?></label>
+																			<?php
+																		}
+																	}
+																catch(Exception $e)
+																	{
+																		die('Erreur : '.$e->getMessage());
+																	}
+																
+																if(isset($_SESSION['username']))
+																	{
+																		?>
+																			<input type="text" class="input_comment" style=" width: 250px " alt="Comment" maxlength="256" name="comment"/>
+																			<input type="hidden" value="<?php echo $tab[10];?>" name="file">
+																			<input type="submit" class="submit_btn" alt="Submit Buttton" name="submit" value="Submit" />
+																		<?php
+																	}
+																else
+																	{
+																		?>
+																			<input type="text" readonly class="input_comment" style=" width: 200px " alt="Comment" maxlength="256" name="comment"/>
+																			<button href="index.php">Login to comment</button>
+																		<?php
+																	}
+															?>
+														</fieldset>
+													</form>
+												</div>
+												<!--END textarea-->
+							
+												<!--for ICON-->
+												<div style="background: #000; float: right; width: 380px; margin-left: 10px; height: 70px; margin-bottom: 10px;">
+													<form action="tag_post.php" method="post">
+													<!--form action="" method="post"-->
+														<fieldset id="fieldset_uregister"> 
+															<legend>Add tags</legend>
+															<?php
+																if(isset($_SESSION['username']))
+																	{
+																		?>
+																			<input type="text" class="input_comment" style=" width: 250px " alt="Tag" maxlength="45" name="tag"/>
+																			<input type="hidden" value="<?php echo $tab[10];?>" name="file">
+																			<input type="submit" class="submit_btn" alt="Submit Button" name="submit" value="Submit" />
+																		<?php
+																	}
+																else
+																	{
+																		?>
+																			<input type="text" readonly class="input_comment" style=" width: 200px " alt="Tag" maxlength="45" name="tag"/>
+																			<button href="index.php">Login to tag</button>
+																		<?php
+																	}
+															?>
+															
+														</fieldset>
+													</form>
+												</div>
+												<!--END ICON-->                          
+												</div>
+					</a>
+					<a href="" class="img_back12 blow" style="background: url(<?php echo $tab[11]?>) no-repeat center center;" id="dialog_link12" class="ui-state-default ui-corner-all">
+						<div class="bottom_span_text"><?php echo $tab2[11]  . " <br/>" . "<small>" . $tab1[11] . "</small>";?></div>
+						<div class="bottom_span"></div>
+						<div id="dialog12" title="Dialog Title">
+							<p><?php echo $tab2[11]?> <?php echo $tab1[11]?> !!!</p>
+							<div style="float: left;">
+								<img src="<?php echo $tab[11]?>" alt=""/>
+							</div>
+				
+							<!-- FOR THE MAP-->
+					<div id="map_canvas12" style="float: right; width: 380px; height: 300px; background: #000; margin-left: 10px; margin-bottom: 10px;">
+                                            
+                                        </div>
+				    <!-- END THE MAP-->
+				    
+												<!--for textarea-->
+												<div style="background: #000; float: right; width: 380px; margin-left: 10px; height: 70px; margin-bottom: 10px;">
+													<form action="comment_post.php" method="post">
+													<!--form action="" method="post"-->
+														<fieldset id="fieldset_uregister"> 
+															<legend>Add comments</legend>
+															<?php
+																try
+																	{	
+																		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+																		$bdd = new PDO('mysql:host=localhost;dbname=logipamo_nasa','logipamo_esih','esih007',$pdo_options);
+																		$a=$tab[11];
+																		$req = $bdd->query("SELECT * FROM comments where path_file = '$a'");
+																		if($donnees = $req->fetch()){
+																			?>
+																				Last comment: <?php echo $donnees['name_user'];?> <?php echo $donnees['date_comment'];?><br/>
+																				<label><?php echo $donnees['comment'];?></label>
+																			<?php
+																		}
+																	}
+																catch(Exception $e)
+																	{
+																		die('Erreur : '.$e->getMessage());
+																	}
+																
+																if(isset($_SESSION['username']))
+																	{
+																		?>
+																			<input type="text" class="input_comment" style=" width: 250px " alt="Comment" maxlength="256" name="comment"/>
+																			<input type="hidden" value="<?php echo $tab[11];?>" name="file">
+																			<input type="submit" class="submit_btn" alt="Submit Buttton" name="submit" value="Submit" />
+																		<?php
+																	}
+																else
+																	{
+																		?>
+																			<input type="text" readonly class="input_comment" style=" width: 200px " alt="Comment" maxlength="256" name="comment"/>
+																			<button href="index.php">Login to comment</button>
+																		<?php
+																	}
+															?>
+														</fieldset>
+													</form>
+												</div>
+												<!--END textarea-->
+							
+												<!--for ICON-->
+												<div style="background: #000; float: right; width: 380px; margin-left: 10px; height: 70px; margin-bottom: 10px;">
+													<form action="tag_post.php" method="post">
+													<!--form action="" method="post"-->
+														<fieldset id="fieldset_uregister"> 
+															<legend>Add tags</legend>
+															<?php
+																if(isset($_SESSION['username']))
+																	{
+																		?>
+																			<input type="text" class="input_comment" style=" width: 250px " alt="Tag" maxlength="45" name="tag"/>
+																			<input type="hidden" value="<?php echo $tab[11];?>" name="file">
+																			<input type="submit" class="submit_btn" alt="Submit Button" name="submit" value="Submit" />
+																		<?php
+																	}
+																else
+																	{
+																		?>
+																			<input type="text" readonly class="input_comment" style=" width: 200px " alt="Tag" maxlength="45" name="tag"/>
+																			<button href="index.php">Login to tag</button>
+																		<?php
+																	}
+															?>
+															
+														</fieldset>
+													</form>
+												</div>
+												<!--END ICON-->
+												</div>
+					</a>
+				</div>
+    
+			</div>
+                    
+                    <!--<div id="right_pane">
+                        
+                    </div>-->
                 </div>
-                <div class="span6">
-                  Fluid 6
-                </div>
-              </div>
             </div>
-          </div>
-<pre class="prettyprint linenums">
-&lt;div class="row-fluid"&gt;
-  &lt;div class="span12"&gt;
-    Fluid 12
-    &lt;div class="row-fluid"&gt;
-      &lt;div class="span6"&gt;
-        Fluid 6
-        &lt;div class="row-fluid"&gt;
-          &lt;div class="span6"&gt;Fluid 6&lt;/div&gt;
-          &lt;div class="span6"&gt;Fluid 6&lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div class="span6"&gt;Fluid 6&lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-</pre>
-
-        </section>
-
-
-
-
-        <!-- Layouts (Default and fluid)
-        ================================================== -->
-        <section id="layouts">
-          <div class="page-header">
-            <h1>Layouts</h1>
-          </div>
-
-          <h2>Fixed layout</h2>
-          <p>Provides a common fixed-width (and optionally responsive) layout with only <code>&lt;div class="container"&gt;</code> required.</p>
-          <div class="mini-layout">
-            <div class="mini-layout-body"></div>
-          </div>
-<pre class="prettyprint linenums">
-&lt;body&gt;
-  &lt;div class="container"&gt;
-    ...
-  &lt;/div&gt;
-&lt;/body&gt;
-</pre>
-
-          <h2>Fluid layout</h2>
-          <p>Create a fluid, two-column page with <code>&lt;div class="container-fluid"&gt;</code>&mdash;great for applications and docs.</p>
-          <div class="mini-layout fluid">
-            <div class="mini-layout-sidebar"></div>
-            <div class="mini-layout-body"></div>
-          </div>
-<pre class="prettyprint linenums">
-&lt;div class="container-fluid"&gt;
-  &lt;div class="row-fluid"&gt;
-    &lt;div class="span2"&gt;
-      &lt;!--Sidebar content--&gt;
-    &lt;/div&gt;
-    &lt;div class="span10"&gt;
-      &lt;!--Body content--&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-</pre>
-        </section>
-
-
-
-
-        <!-- Responsive design
-        ================================================== -->
-        <section id="responsive">
-          <div class="page-header">
-            <h1>Responsive design</h1>
-          </div>
-
-          <h2>Enabling responsive features</h2>
-          <p>Turn on responsive CSS in your project by including the proper meta tag and additional stylesheet within the <code>&lt;head&gt;</code> of your document. If you've compiled Bootstrap from the Customize page, you need only include the meta tag.</p>
-<pre class="prettyprint linenums">
-&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-&lt;link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet"&gt;
-</pre>
-          <p><span class="label label-info">Heads up!</span>  Bootstrap doesn't include responsive features by default at this time as not everything needs to be responsive. Instead of encouraging developers to remove this feature, we figure it best to enable it as needed.</p>
-
-          <h2>About responsive Bootstrap</h2>
-          <img src="bootstrap/img/responsive-illustrations.png" alt="Responsive devices" style="float: right; margin: 0 0 20px 20px;">
-          <p>Media queries allow for custom CSS based on a number of conditions&mdash;ratios, widths, display type, etc&mdash;but usually focuses around <code>min-width</code> and <code>max-width</code>.</p>
-          <ul>
-            <li>Modify the width of column in our grid</li>
-            <li>Stack elements instead of float wherever necessary</li>
-            <li>Resize headings and text to be more appropriate for devices</li>
-          </ul>
-          <p>Use media queries responsibly and only as a start to your mobile audiences. For larger projects, do consider dedicated code bases and not layers of media queries.</p>
-
-          <h2>Supported devices</h2>
-          <p>Bootstrap supports a handful of media queries in a single file to help make your projects more appropriate on different devices and screen resolutions. Here's what's included:</p>
-          <table class="table table-bordered table-striped">
-            <thead>
-              <tr>
-                <th>Label</th>
-                <th>Layout width</th>
-                <th>Column width</th>
-                <th>Gutter width</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Large display</td>
-                <td>1200px and up</td>
-                <td>70px</td>
-                <td>30px</td>
-              </tr>
-              <tr>
-                <td>Default</td>
-                <td>980px and up</td>
-                <td>60px</td>
-                <td>20px</td>
-              </tr>
-              <tr>
-                <td>Portrait tablets</td>
-                <td>768px and above</td>
-                <td>42px</td>
-                <td>20px</td>
-              </tr>
-              <tr>
-                <td>Phones to tablets</td>
-                <td>767px and below</td>
-                <td class="muted" colspan="2">Fluid columns, no fixed widths</td>
-              </tr>
-              <tr>
-                <td>Phones</td>
-                <td>480px and below</td>
-                <td class="muted" colspan="2">Fluid columns, no fixed widths</td>
-              </tr>
-            </tbody>
-          </table>
-<pre class="prettyprint linenums">
-/* Large desktop */
-@media (min-width: 1200px) { ... }
-
-/* Portrait tablet to landscape and desktop */
-@media (min-width: 768px) and (max-width: 979px) { ... }
-
-/* Landscape phone to portrait tablet */
-@media (max-width: 767px) { ... }
-
-/* Landscape phones and down */
-@media (max-width: 480px) { ... }
-</pre>
-
-
-          <h2>Responsive utility classes</h2>
-          <p>For faster mobile-friendly development, use these utility classes for showing and hiding content by device. Below is a table of the available classes and their effect on a given media query layout (labeled by device). They can be found in <code>responsive.less</code>.</p>
-          <table class="table table-bordered table-striped responsive-utilities">
-            <thead>
-              <tr>
-                <th>Class</th>
-                <th>Phones <small>767px and below</small></th>
-                <th>Tablets <small>979px to 768px</small></th>
-                <th>Desktops <small>Default</small></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th><code>.visible-phone</code></th>
-                <td class="is-visible">Visible</td>
-                <td class="is-hidden">Hidden</td>
-                <td class="is-hidden">Hidden</td>
-              </tr>
-              <tr>
-                <th><code>.visible-tablet</code></th>
-                <td class="is-hidden">Hidden</td>
-                <td class="is-visible">Visible</td>
-                <td class="is-hidden">Hidden</td>
-              </tr>
-              <tr>
-                <th><code>.visible-desktop</code></th>
-                <td class="is-hidden">Hidden</td>
-                <td class="is-hidden">Hidden</td>
-                <td class="is-visible">Visible</td>
-              </tr>
-              <tr>
-                <th><code>.hidden-phone</code></th>
-                <td class="is-hidden">Hidden</td>
-                <td class="is-visible">Visible</td>
-                <td class="is-visible">Visible</td>
-              </tr>
-              <tr>
-                <th><code>.hidden-tablet</code></th>
-                <td class="is-visible">Visible</td>
-                <td class="is-hidden">Hidden</td>
-                <td class="is-visible">Visible</td>
-              </tr>
-              <tr>
-                <th><code>.hidden-desktop</code></th>
-                <td class="is-visible">Visible</td>
-                <td class="is-visible">Visible</td>
-                <td class="is-hidden">Hidden</td>
-              </tr>
-            </tbody>
-          </table>
-
-          <h3>When to use</h3>
-          <p>Use on a limited basis and avoid creating entirely different versions of the same site. Instead, use them to complement each device's presentation. Responsive utilities should not be used with tables, and as such are not supported.</p>
-
-          <h3>Responsive utilities test case</h3>
-          <p>Resize your browser or load on different devices to test the above classes.</p>
-          <h4>Visible on...</h4>
-          <p>Green checkmarks indicate that class is visible in your current viewport.</p>
-          <ul class="responsive-utilities-test">
-            <li>Phone<span class="visible-phone">&#10004; Phone</span></li>
-            <li>Tablet<span class="visible-tablet">&#10004; Tablet</span></li>
-            <li>Desktop<span class="visible-desktop">&#10004; Desktop</span></li>
-          </ul>
-          <h4>Hidden on...</h4>
-          <p>Here, green checkmarks indicate that class is hidden in your current viewport.</p>
-          <ul class="responsive-utilities-test hidden-on">
-            <li>Phone<span class="hidden-phone">&#10004; Phone</span></li>
-            <li>Tablet<span class="hidden-tablet">&#10004; Tablet</span></li>
-            <li>Desktop<span class="hidden-desktop">&#10004; Desktop</span></li>
-          </ul>
-
-        </section>
-
-
-
-      </div>
-    </div>
-
-  </div>
-
-
-
-    <!-- Footer
-    ================================================== -->
-    <footer class="footer">
-      <div class="container">
-        <p>Designed and built with all the love in the world by <a href="http://twitter.com/mdo" target="_blank">@mdo</a> and <a href="http://twitter.com/fat" target="_blank">@fat</a>.</p>
-        <p>Code licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License v2.0</a>, documentation under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
-        <p><a href="http://glyphicons.com">Glyphicons Free</a> licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
-        <ul class="footer-links">
-          <li><a href="http://blog.getbootstrap.com">Blog</a></li>
-          <li class="muted">&middot;</li>
-          <li><a href="https://github.com/twitter/bootstrap/issues?state=open">Issues</a></li>
-          <li class="muted">&middot;</li>
-          <li><a href="https://github.com/twitter/bootstrap/blob/master/CHANGELOG.md">Changelog</a></li>
-        </ul>
-      </div>
-    </footer>
-
-
-
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-    <script src="bootstrap/js/jquery.js"></script>
-    <script src="bootstrap/js/bootstrap-transition.js"></script>
-    <script src="bootstrap/js/bootstrap-alert.js"></script>
-    <script src="bootstrap/js/bootstrap-modal.js"></script>
-    <script src="bootstrap/js/bootstrap-dropdown.js"></script>
-    <script src="bootstrap/js/bootstrap-scrollspy.js"></script>
-    <script src="bootstrap/js/bootstrap-tab.js"></script>
-    <script src="bootstrap/js/bootstrap-tooltip.js"></script>
-    <script src="bootstrap/js/bootstrap-popover.js"></script>
-    <script src="bootstrap/js/bootstrap-button.js"></script>
-    <script src="bootstrap/js/bootstrap-collapse.js"></script>
-    <script src="bootstrap/js/bootstrap-carousel.js"></script>
-    <script src="bootstrap/js/bootstrap-typeahead.js"></script>
-    <script src="bootstrap/js/bootstrap-affix.js"></script>
-
-    <script src="bootstrap/js/holder/holder.js"></script>
-    <script src="bootstrap/js//prettify.js"></script>
-
-    <script src="bootstrap/js/application.js"></script>
-
-
-    <!-- Analytics
-    ================================================== -->
-    <script>
-      var _gauges = _gauges || [];
-      (function() {
-        var t   = document.createElement('script');
-        t.type  = 'text/javascript';
-        t.async = true;
-        t.id    = 'gauges-tracker';
-        t.setAttribute('data-site-id', '4f0dc9fef5a1f55508000013');
-        t.src = '//secure.gaug.es/track.js';
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(t, s);
-      })();
-    </script>
-
-  </body>
-</html>
+            <div id="footer">
+                  <a style="color: #fff;">Copyright ESIH 2013 | </a>  <a>Help | </a> <a> Community</a>
+            </div>
+        </body>
+    </html>

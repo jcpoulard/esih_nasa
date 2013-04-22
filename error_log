@@ -1,0 +1,30 @@
+[21-Apr-2013 19:09:22] PHP Warning:  session_start() [<a href='function.session-start'>function.session-start</a>]: Cannot send session cache limiter - headers already sent (output started at /home5/logipamo/public_html/nasa/index.php:30) in /home5/logipamo/public_html/nasa/index.php on line 33
+[21-Apr-2013 19:28:48] PHP Warning:  session_destroy() [<a href='function.session-destroy'>function.session-destroy</a>]: Trying to destroy uninitialized session in /home5/logipamo/public_html/nasa/logout.php on line 2
+[21-Apr-2013 19:28:53] PHP Warning:  session_destroy() [<a href='function.session-destroy'>function.session-destroy</a>]: Trying to destroy uninitialized session in /home5/logipamo/public_html/nasa/logout.php on line 2
+[21-Apr-2013 19:31:25] PHP Warning:  session_destroy() [<a href='function.session-destroy'>function.session-destroy</a>]: Trying to destroy uninitialized session in /home5/logipamo/public_html/nasa/logout.php on line 2
+[21-Apr-2013 19:31:29] PHP Warning:  session_destroy() [<a href='function.session-destroy'>function.session-destroy</a>]: Trying to destroy uninitialized session in /home5/logipamo/public_html/nasa/logout.php on line 2
+[21-Apr-2013 19:31:58] PHP Warning:  session_destroy() [<a href='function.session-destroy'>function.session-destroy</a>]: Trying to destroy uninitialized session in /home5/logipamo/public_html/nasa/logout.php on line 3
+[21-Apr-2013 19:32:02] PHP Warning:  session_destroy() [<a href='function.session-destroy'>function.session-destroy</a>]: Trying to destroy uninitialized session in /home5/logipamo/public_html/nasa/logout.php on line 3
+[21-Apr-2013 19:33:01] PHP Warning:  session_destroy() [<a href='function.session-destroy'>function.session-destroy</a>]: Trying to destroy uninitialized session in /home5/logipamo/public_html/nasa/logout.php on line 3
+[21-Apr-2013 19:33:05] PHP Warning:  session_destroy() [<a href='function.session-destroy'>function.session-destroy</a>]: Trying to destroy uninitialized session in /home5/logipamo/public_html/nasa/logout.php on line 3
+[21-Apr-2013 22:24:03] PHP Warning:  include(api.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory in /home5/logipamo/public_html/nasa/index.php on line 1436
+[21-Apr-2013 22:24:03] PHP Warning:  include() [<a href='function.include'>function.include</a>]: Failed opening 'api.php' for inclusion (include_path='.:/usr/lib64/php:/usr/lib/php') in /home5/logipamo/public_html/nasa/index.php on line 1436
+[21-Apr-2013 22:24:11] PHP Warning:  include(api.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory in /home5/logipamo/public_html/nasa/index.php on line 1436
+[21-Apr-2013 22:24:11] PHP Warning:  include() [<a href='function.include'>function.include</a>]: Failed opening 'api.php' for inclusion (include_path='.:/usr/lib64/php:/usr/lib/php') in /home5/logipamo/public_html/nasa/index.php on line 1436
+[21-Apr-2013 22:24:11] PHP Warning:  include(api.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory in /home5/logipamo/public_html/nasa/index.php on line 1436
+[21-Apr-2013 22:24:11] PHP Warning:  include() [<a href='function.include'>function.include</a>]: Failed opening 'api.php' for inclusion (include_path='.:/usr/lib64/php:/usr/lib/php') in /home5/logipamo/public_html/nasa/index.php on line 1436
+[21-Apr-2013 22:24:11] PHP Warning:  include(api.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory in /home5/logipamo/public_html/nasa/index.php on line 1436
+[21-Apr-2013 22:24:11] PHP Warning:  include() [<a href='function.include'>function.include</a>]: Failed opening 'api.php' for inclusion (include_path='.:/usr/lib64/php:/usr/lib/php') in /home5/logipamo/public_html/nasa/index.php on line 1436
+[21-Apr-2013 22:25:13] PHP Warning:  include(api1.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory in /home5/logipamo/public_html/nasa/index.php on line 1436
+[21-Apr-2013 22:25:13] PHP Warning:  include() [<a href='function.include'>function.include</a>]: Failed opening 'api1.php' for inclusion (include_path='.:/usr/lib64/php:/usr/lib/php') in /home5/logipamo/public_html/nasa/index.php on line 1436
+[22-Apr-2013 01:52:21] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home5/logipamo/public_html/nasa/register_post.php:76) in /home5/logipamo/public_html/nasa/register_post.php on line 95
+[22-Apr-2013 05:36:39] PHP Parse error:  syntax error, unexpected T_VARIABLE in /home5/logipamo/public_html/nasa/index.php on line 26
+[22-Apr-2013 05:36:45] PHP Parse error:  syntax error, unexpected T_VARIABLE in /home5/logipamo/public_html/nasa/index.php on line 26
+[22-Apr-2013 05:36:51] PHP Parse error:  syntax error, unexpected T_VARIABLE in /home5/logipamo/public_html/nasa/index.php on line 26
+[22-Apr-2013 05:36:58] PHP Parse error:  syntax error, unexpected T_VARIABLE in /home5/logipamo/public_html/nasa/index.php on line 26
+[22-Apr-2013 05:37:04] PHP Parse error:  syntax error, unexpected T_VARIABLE in /home5/logipamo/public_html/nasa/index.php on line 26
+[22-Apr-2013 05:37:25] PHP Parse error:  syntax error, unexpected T_VARIABLE in /home5/logipamo/public_html/nasa/index.php on line 26
+[22-Apr-2013 05:37:36] PHP Parse error:  syntax error, unexpected T_VARIABLE in /home5/logipamo/public_html/nasa/index.php on line 26
+[22-Apr-2013 05:37:53] PHP Parse error:  syntax error, unexpected T_VARIABLE in /home5/logipamo/public_html/nasa/index.php on line 26
+[22-Apr-2013 05:38:02] PHP Parse error:  syntax error, unexpected T_VARIABLE in /home5/logipamo/public_html/nasa/index.php on line 26
+[22-Apr-2013 05:38:03] PHP Parse error:  syntax error, unexpected T_VARIABLE in /home5/logipamo/public_html/nasa/index.php on line 26
