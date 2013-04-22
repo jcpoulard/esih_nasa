@@ -1,0 +1,3 @@
+Username=Nom utilisateur
+Login=Connexion
+Password=Mot de passe

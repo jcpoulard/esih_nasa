@@ -1,0 +1,47 @@
+.scroll{
+	height: 100px;
+	width: 100%;
+	background: #28597a;
+	overflow: auto;
+}
+
+.in {
+	width: 500px;
+	height: 30px;
+	border: solid 1px blue;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.in:hover {
+	background: #cccccc;
+}
+
+.bt {
+	width: 200px;
+	height: 30px;
+	border: solid 1px blue;
+	border: none;
+	color: #141414;
+}
+
+.bt:hover {
+	border-top-color: #28597a;
+	background: #28597a;
+	color: #ccc;  
+}
+
+h4, h3{
+	color:blue;
+}
+
+.h2{
+	margin:auto;
+	text-align:center;
+	color:blue;
+}
+
+a{
+	color: white;
+}
